@@ -82,7 +82,7 @@ namespace offsetUpdater
         }
         static bool DiffCheck(string file1, string file2)
         {
-            bool equalOrNot = File.ReadAllLines(file1).SequenceEqual(File.ReadAllLines(file2));
+            bool equalOrNot = File.ReadAllLines(file1).SequenceEqual(File.ReadAllLines(file2)); //Compares the local file's offsets to github's offsets
 
             return equalOrNot;
         }
