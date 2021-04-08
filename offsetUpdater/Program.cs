@@ -1,11 +1,8 @@
 ﻿using System;
-using IniParser;
 using System.IO;
+using IniParser;
 using System.Net;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace offsetUpdater
 {
