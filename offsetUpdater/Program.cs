@@ -10,7 +10,8 @@ namespace offsetUpdater
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Checking for updated offsets...");
+            WebClient wc = new WebClient(); //Initializing WebClient
+            var parser = new FileIniDataParser(); //Initializing .ini parser
 
             //Defining the path's of files
             string localOffsetPath = "C:\\Mediocre\\Offsets.ini";
@@ -19,12 +20,12 @@ namespace offsetUpdater
             string textLocalOffsetPath = "C:\\Mediocre\\Offsets.txt";
             string textGithubOffsetPath = "C:\\Mediocre\\GithubOffsets.txt";
 
-            WebClient wc = new WebClient(); //Initializing WebClient
-            var parser = new FileIniDataParser(); //Initializing .ini parser
-
             try
             {
-                File.WriteAllText(githubOffsetPath, wc.DownloadString("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.toml")); //Downloading all of the up-to-date offsets from github and saving them to a .ini file for writing
+                //Downloading all of the up-to-date offsets from github and saving them to a .ini file for writing
+                File.WriteAllText(githubOffsetPath, wc.DownloadString("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.toml"));
+                File.WriteAllText(textLocalOffsetPath, parser.ReadFile(localOffsetPath).ToString()); //Simply saving Offsets.ini as a .txt for comparison
+                File.WriteAllText(textGithubOffsetPath, parser.ReadFile(githubOffsetPath).ToString()); //Simply saving GithubOffsets.ini as a .txt for comparison            
             }
             catch(Exception e)
             {
@@ -33,13 +34,7 @@ namespace offsetUpdater
                 Environment.Exit(0);
             }
 
-
-            File.WriteAllText(textLocalOffsetPath, parser.ReadFile(localOffsetPath).ToString()); //Simply saving Offsets.ini as a .txt for comparison
-            File.WriteAllText(textGithubOffsetPath, parser.ReadFile(githubOffsetPath).ToString()); //Simply saving GithubOffsets.ini as a .txt for comparison
-
-            //TODO: Add failsafes and proper exception handling
-            //TODO: Add failsafes and proper exception handling
-            //TODO: Add failsafes and proper exception handling
+            Console.WriteLine("Checking for updated offsets...");
 
             if(!DiffCheck(textLocalOffsetPath, textGithubOffsetPath)) //If there's a difference (false)
             {
@@ -54,7 +49,8 @@ namespace offsetUpdater
 
                     try
                     {
-                        File.WriteAllText(localOffsetPath, wc.DownloadString("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.toml")); //Downloading all of the up-to-date offsets from github and saving them to the original .ini file for use
+                        //Downloading all of the up-to-date offsets from github and saving them to a .ini file for writing
+                        File.WriteAllText(localOffsetPath, wc.DownloadString("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.toml"));
                     }
                     catch(Exception e)
                     {
@@ -67,7 +63,7 @@ namespace offsetUpdater
                     FileDetetion();
 
                     Console.WriteLine("Everything is up-to-date!");
-                    //Console.ReadLine(); for debugging purposes later
+                    //Console.ReadLine();
                 }
                 else
                 {
@@ -75,7 +71,7 @@ namespace offsetUpdater
                     FileDetetion();
 
                     Console.WriteLine("Offsets left unupdated.");
-                    //Console.ReadLine(); for debugging purposes later
+                    //Console.ReadLine();
                 }
             }
             else
@@ -84,10 +80,10 @@ namespace offsetUpdater
                 FileDetetion();
 
                 Console.WriteLine("Everything is up-to-date!");
-                //Console.ReadLine(); for debugging purposes later
+                //Console.ReadLine();
             }
 
-            //Console.ReadLine(); for debugging purposes later
+            //Console.ReadLine();
         }
         static bool DiffCheck(string file1, string file2)
         {
