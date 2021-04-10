@@ -2,6 +2,7 @@
 {
     class Definitions
     {
+        //Seperate class file for cleaner code & future proofing
         public string localOffsetPath = "C:\\Mediocre\\Offsets.ini";
         public string githubOffsetPath = "C:\\Mediocre\\GithubOffsets.ini";
 

@@ -57,7 +57,6 @@ namespace offsetUpdater
                     FileDetetion();
 
                     Console.WriteLine("Everything is up-to-date!");
-                    //Console.ReadLine();
                 }
                 else
                 {
@@ -65,7 +64,6 @@ namespace offsetUpdater
                     FileDetetion();
 
                     Console.WriteLine("Offsets left unupdated.");
-                    //Console.ReadLine();
                 }
             }
             else
@@ -74,10 +72,7 @@ namespace offsetUpdater
                 FileDetetion();
 
                 Console.WriteLine("Everything is up-to-date!");
-                //Console.ReadLine();
-            }
-
-            //Console.ReadLine();
+            };
         }
         static bool DiffCheck(string file1, string file2)
         {
