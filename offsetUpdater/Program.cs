@@ -36,7 +36,7 @@ namespace offsetUpdater
                 Console.WriteLine("[Y] yes [N] no");
                 string answer = Console.ReadLine(); //Storing user's input into a string called "answer"
 
-                if(answer.ToUpper() == "Y") //If "answer" equals to 'Y'
+                if(answer.ToUpper() == "Y" || answer.ToUpper() == "YE" || answer.ToUpper() == "YES") //If "answer" equals to 'Y' or "YES"
                 {
                     Console.WriteLine(""); //Extra line to seperate the user's answer from the program's messages
                     Console.WriteLine("Overwriting offsets...");
